@@ -1,0 +1,41 @@
+from keras.preprocessing import image
+from keras.preprocessing.image import ImageDataGenerator
+
+img=image.load_img('train/cat.18.jpg',target_size=(200,200))
+
+import matplotlib.pyplot as plt
+
+plt.imshow(img)
+
+type(img)
+
+datagen=ImageDataGenerator(
+  rotation_range=40,
+  shear_range=0.2,
+  zoom_range=0.2,
+  horizontal_flip=True,
+  vertical_flip=True,
+  width_shift_range=0.2,
+  height_shift_range=0.2,
+  fill_mode='reflect'         #what to do with the pixels if the object is shifted towards right or left
+)
+
+img=image.img_to_array(img)
+
+type(img)
+
+img.shape
+
+input_batch=img.reshape(1,200,200,3)
+
+#for one image processing we use flow
+
+i=0
+
+for output in datagen.flow(input_batch,batch_size=1,save_to_dir='aug')
+             i=i+1
+             if i==10:
+                 break
+                 
+                 
+input_batch.shape
